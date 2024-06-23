@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/core/utils/constant.dart';
+import 'package:graduationproject/feature/Text/text_view.dart';
+import 'package:graduationproject/feature/setting/presentation/view/setting_view.dart';
 import 'package:graduationproject/views/face_view.dart';
 import 'package:graduationproject/views/speech_view.dart';
 import 'package:graduationproject/views/text_view.dart';
@@ -44,20 +47,11 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-        // title: Text(
-        //   'Choose option',
-        //   style: TextStyle(
-        //       fontSize: 25,
-        //       fontFamily: 'Inter',
-        //       fontWeight: FontWeight.w600,
-        //       color: Colors.black),
-        // ),
-        // actions: [
-        //   Icon(
-        //     Icons.touch_app,
-        //     color: Colors.black,
-        //   )
-        // ],
+        actions: [
+          IconButton(onPressed: (){
+            navigateTo(context, const SettingView());
+          }, icon: const Icon(Icons.settings),),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
@@ -85,7 +79,7 @@ class Home extends StatelessWidget {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return TextView();
+                  return const TextViewItem();
                 },
               ));
             },
