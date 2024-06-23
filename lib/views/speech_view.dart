@@ -163,6 +163,7 @@ class SpeechView extends StatelessWidget {
         DefaultButton(
           size: size,
           txt: 'Get Result',
+          function: (){},
         )
       ]),
     );

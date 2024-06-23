@@ -6,15 +6,18 @@ class DefaultButton extends StatelessWidget {
   DefaultButton({
     super.key,
     required this.size,
-    required this.txt,
+    required this.txt, required this.function,
   });
   String? txt;
   final Size size;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        function();
+      },
       child: Container(
         child: Center(
           child: Text(
