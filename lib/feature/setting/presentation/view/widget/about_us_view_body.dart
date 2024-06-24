@@ -115,7 +115,7 @@ class AboutUsViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            'assets/images/unnamed 1.png',
+            'assets/images/logo.jpg',
             width: 250,
           ),
           const SizedBox(height: 10),
@@ -123,7 +123,7 @@ class AboutUsViewBody extends StatelessWidget {
             'This App specializes in emotion analysis technology, utilizing text, video, and voice to accurately interpret human emotions. Our innovative application integrates machine learning, natural language processing, facial recognition, and voice analysis to deliver real-time insights across various interactions.',
             style: TextStyle(
               fontSize: 20,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           const Spacer(),
@@ -134,7 +134,7 @@ class AboutUsViewBody extends StatelessWidget {
               color: Colors.blue,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           SizedBox(
             height: 50,
             child: ListView.separated(
@@ -145,7 +145,8 @@ class AboutUsViewBody extends StatelessWidget {
                 return InkWell(
                   onTap: () => _launchLinkedInURL(contact.linkedInUrl),
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(contact.imageUrl),
+                    radius: 30,
+                    backgroundImage: AssetImage(contact.imageUrl),
                     backgroundColor: Colors.transparent,
                   ),
                 );
@@ -189,13 +190,18 @@ class Contact {
 List<Contact> contacts = [
   Contact(
     name: 'Moaz Mohamed',
-    imageUrl: 'https://media.licdn.com/dms/image/D4D35AQFVuGaiPit5SA/profile-framedphoto-shrink_100_100/0/1717799372090?e=1719709200&v=beta&t=NsEu1OBIYR4Bb-cKTKtLTWMhIufLYQ-XPhMqqP0gZ34',
+    imageUrl: 'assets/images/moaz.jpg',
     linkedInUrl: 'https://www.linkedin.com/in/moaz-mohamed-46b053231/',
   ),
   Contact(
-    name: 'John Doe',
-    imageUrl: 'https://via.placeholder.com/150',
-    linkedInUrl: 'https://www.linkedin.com/in/johndoe/',
+    name: 'Mostafa Mohamed',
+    imageUrl: 'assets/images/mostafa.jpg',
+    linkedInUrl: 'https://www.linkedin.com/in/mostafa-mohamed-talkhan-58a7b927a/',
+  ),
+  Contact(
+    name: 'Emad Ahmed',
+    imageUrl: 'assets/images/emad.jpg',
+    linkedInUrl: 'https://www.linkedin.com/in/emad-ahmed-196712284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
   ),
   // Add more contacts as needed
 ];

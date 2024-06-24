@@ -37,7 +37,7 @@ class SettingCubit extends Cubit<SettingStates>
   ProfileModel? profileModel;
   void getProfile()
   {
-    //emit(ProfileLoadingStates());
+    emit(ProfileLoadingStates());
     ApiService.getData(
         url: 'profile',
         token: token

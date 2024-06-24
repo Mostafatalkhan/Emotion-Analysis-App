@@ -15,17 +15,17 @@ class AccountImageAndTextSection extends StatelessWidget {
       child: Center(
         child: Column(
           children:  [
-            CircleAvatar(
-              radius: 52,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage('https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg'),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            // CircleAvatar(
+            //   radius: 52,
+            //   backgroundColor: Colors.white,
+            //   child: CircleAvatar(
+            //     radius: 50,
+            //     backgroundImage: NetworkImage('https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg'),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
             //if(SettingCubit().get(context).profileModel !=null)
             TextAccount(),
             SizedBox(

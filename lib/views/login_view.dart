@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/constant.dart';
 import 'package:graduationproject/views/home_view.dart';
 import 'package:graduationproject/views/register.dart';
 import 'package:graduationproject/widgets/custom_text_field.dart';
@@ -22,7 +21,7 @@ class Login extends StatelessWidget {
             children: [
               Center(
                 child: Image.asset(
-                  faceimg,
+                  'assets/images/images (1).jpeg',
                   width: size.width * 0.7,
                 ),
               ),

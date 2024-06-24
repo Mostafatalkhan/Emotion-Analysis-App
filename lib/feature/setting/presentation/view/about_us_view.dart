@@ -9,7 +9,7 @@ class AboutUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: Colors.white,
       appBar: appBar(context: context,text: 'About Us'),
       body: const AboutUsViewBody(),
     );

@@ -24,36 +24,48 @@ class Account extends StatelessWidget {
             onTap: (){
               navigateTo(context, const AccountView());
             },
-            child: Row(
-              children:  [
-                //if(SettingCubit().get(context).profileModel !=null)
-                //   const CircleAvatar(
-                //   radius: 30,
-                //   backgroundImage: NetworkImage('https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg'
-                //   ),
-                // ),
-                // const SizedBox(
-                //   width: 10,
-                // ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if(SettingCubit().get(context).profileModel !=null)
-                      const TextAccount(),
-                    const SizedBox(
-                      height: 5,
+            child: Card(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children:  [
+                    //if(SettingCubit().get(context).profileModel !=null)
+                    //   const CircleAvatar(
+                    //   radius: 30,
+                    //   backgroundImage: NetworkImage('https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg'
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if(SettingCubit().get(context).profileModel !=null)
+                          const TextAccount(),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Text('Mobile Developer',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey
+                          ),
+                        ),
+                      ],
                     ),
-                    const Text('Mobile Developer',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey
-                      ),
-                    ),
+                    const Spacer(),
+                    const Icon(Icons.arrow_forward_ios,color: Colors.black54,size: 18,),
                   ],
                 ),
-                const Spacer(),
-                const Icon(Icons.arrow_forward_ios,color: Colors.white70,size: 18,),
-              ],
+              ),
             ),
           ),
         );

@@ -22,7 +22,7 @@ class _FaceViewState extends State<FaceView> {
   final ImagePicker _picker = ImagePicker();
 
   final String rapidApiKey =
-      '5e84df6469msh678eda669f1db75p1ab887jsn5edddf0c7566'; // Replace with your RapidAPI key
+      '4e9b63802bmshfad12248c0df9cbp15d021jsn06eed1a203d3'; // Replace with your RapidAPI key
   final String rapidApiHost = 'faceanalyzer-ai.p.rapidapi.com';
   final String endpoint = 'https://faceanalyzer-ai.p.rapidapi.com/faceanalysis';
 
@@ -179,9 +179,9 @@ class _FaceViewState extends State<FaceView> {
                         letterSpacing: 0.24,
                       ),
                     ),
-                     const TextSpan(
-                      text: 'amazing',
-                      style: TextStyle(
+                      TextSpan(
+                      text: result,
+                      style: const TextStyle(
                         color: Color(0xFF8B4CFC),
                         fontSize: 24,
                         fontWeight: FontWeight.w700,

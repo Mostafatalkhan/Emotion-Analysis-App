@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/constant.dart';
 import 'package:graduationproject/widgets/custom_text_field.dart';
 import 'package:graduationproject/widgets/sign_button.dart';
 
@@ -43,7 +42,7 @@ class Register extends StatelessWidget {
                       width: size.width * 0.1,
                     ),
                     Image.asset(
-                      faceimg,
+                      'assets/images/images (1).jpeg',
                       width: size.width * 0.5,
                     ),
                   ],

@@ -13,8 +13,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 8,
+        elevation: 0,
         leadingWidth: 1,
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -27,7 +28,7 @@ class Home extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 28.0),
                 child: Image.asset(
-                  'assets/images/face.png',
+                  'assets/images/logo.jpg',
                   width: 50,
                   height: 50,
                 ),

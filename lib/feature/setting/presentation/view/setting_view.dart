@@ -8,9 +8,9 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: const SettingViewBody(),
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: SettingViewBody(),
     );
   }
 }

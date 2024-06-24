@@ -138,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Image.asset('assets/images/unnamed 1.png')),
+                  child: Image.asset('assets/images/logo.jpg')),
             ),
           ),
         ],

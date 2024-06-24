@@ -143,7 +143,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 class EmotionService {
   final String apiUrl = 'https://api.edenai.run/v2/text/emotion_detection';
   final String apiKey =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZThkNWZlOTctZmQ2ZC00Y2FjLThmYmUtZWMwODE4Yjg1YjQ1IiwidHlwZSI6ImFwaV90b2tlbiJ9.slkRH3GEgJGK4BAwsASYsI5r_THbUKAIrbsNv0lYvJo';
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjA0NDg1ZWQtZjc3Mi00ZDJjLTg2YjAtNzEwNTY2NWVlYzM3IiwidHlwZSI6ImFwaV90b2tlbiJ9.56hgd4ClsWxhcCXcz8IMmtN5PzPonvHl3pKay5mluqg';
 
   Future<String> detectEmotion(String text) async {
     final response = await http.post(
@@ -169,7 +169,13 @@ class EmotionService {
           responseBody['nlpcloud']['items'] is List<dynamic> &&
           responseBody['nlpcloud']['items'].isNotEmpty) {
         Map<String, dynamic> firstItem = responseBody['nlpcloud']['items'][0];
-        return '${firstItem['emotion']}';
+        String emotion = firstItem['emotion'];
+
+        if (emotion.toLowerCase() == "joy") {
+          emotion = "happy";
+        }
+
+        return emotion;
       } else {
         return 'No emotion detected';
       }

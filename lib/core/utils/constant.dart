@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-String? token;
+String token='';
 
 void navigateTo(context,Widget)=>Navigator.push(
     context,
@@ -115,21 +115,21 @@ AppBar appBar({
   required String text,
 })=>AppBar(
   elevation: 0,
-  backgroundColor: kPrimaryColor,
+  backgroundColor: Colors.white,
   leading: IconButton(
     onPressed: (){
       Navigator.pop(context);
     },
-    icon: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,),
+    icon: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black,),
   ),
   title: Text(text,
   style: const TextStyle(
-    color: Colors.white
+    color: Colors.black
   ),
   ),
 );
 
-Color kPrimaryColor=const Color(0xff2B475E);
+Color kPrimaryColor=Colors.white;
 const kGTSectraFineRegular='Schyler';
 
 

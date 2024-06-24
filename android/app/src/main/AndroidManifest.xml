@@ -18,7 +18,7 @@
         </intent>
     </queries>
     <application
-        android:label="graduationproject"
+        android:label="Emotion"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

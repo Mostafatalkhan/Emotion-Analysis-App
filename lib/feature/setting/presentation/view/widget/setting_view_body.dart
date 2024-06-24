@@ -27,7 +27,7 @@ class SettingViewBody extends StatelessWidget {
               'Settings',
               style: TextStyle(
                 fontSize: 25,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             const SizedBox(
@@ -37,7 +37,7 @@ class SettingViewBody extends StatelessWidget {
               'Account',
               style: TextStyle(
                 fontSize: 22,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             const Account(),
@@ -49,14 +49,14 @@ class SettingViewBody extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 height: 1,
-                color: Colors.white12,
+                color: Colors.black12,
               ),
             ),
             const Text(
               'Settings',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             SettingItem(
@@ -88,7 +88,7 @@ class SettingViewBody extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 height: 1,
-                color: Colors.white12,
+                color: Colors.black12,
               ),
             ),
             Padding(
@@ -117,13 +117,13 @@ class SettingViewBody extends StatelessWidget {
                       'Logout',
                       style: TextStyle(
                         fontSize: 22,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     Spacer(),
                     Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.white70,
+                      color: Colors.black54,
                       size: 18,
                     ),
                   ],

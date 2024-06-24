@@ -18,12 +18,16 @@ class TextAccount extends StatelessWidget {
         {
           profileNameController.text = cubit.data!.name!;
         }
-        return Text(
-          SettingCubit().get(context).profileModel!.data!.name!,
-          style: const TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-          ),
+        return Column(
+          children: [
+            Text(
+              SettingCubit().get(context).profileModel!.data!.name!,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+              ),
+            ),
+          ],
         );
       },
     );

@@ -27,13 +27,13 @@ class SettingItem extends StatelessWidget {
               text,
               style:const TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             const Spacer(),
              const Icon(
               Icons.arrow_forward_ios,
-              color: Colors.white70,
+              color: Colors.black54,
               size: 18,
             ),
           ],

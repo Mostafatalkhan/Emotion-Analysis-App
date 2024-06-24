@@ -1,31 +1,23 @@
 // import 'dart:convert';
 // import 'dart:io';
-//
-// import 'package:flutter/material.dart';
+// import 'package:audioplayers/audioplayers.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:file_picker/file_picker.dart';
+// import 'package:flutter/material.dart';
+// import 'package:graduationproject/widgets/default_app_bar.dart';
+// import 'package:graduationproject/widgets/default_button.dart';
 //
-// void main() {
-//   runApp(MyApp());
-// }
+// class SpeechView extends StatefulWidget {
+//   const SpeechView({super.key});
 //
-// class MyApp extends StatelessWidget {
 //   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: SpeechToTextScreen(),
-//     );
-//   }
+//   State<SpeechView> createState() => _SpeechViewState();
 // }
 //
-// class SpeechToTextScreen extends StatefulWidget {
-//   @override
-//   _SpeechToTextScreenState createState() => _SpeechToTextScreenState();
-// }
-//
-// class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
+// class _SpeechViewState extends State<SpeechView> {
 //   String _responseText = '';
 //   String _fileName = '';
+//   File? _selectedFile;
 //
 //   Future<void> _pickAndUploadFile() async {
 //     try {
@@ -36,6 +28,10 @@
 //
 //       if (result != null) {
 //         final file = File(result.files.single.path!);
+//         setState(() {
+//           _selectedFile = file;
+//           _fileName = file.path.split('/').last;
+//         });
 //         await _transcribeFile(file);
 //       }
 //     } catch (e) {
@@ -43,6 +39,7 @@
 //       setState(() {
 //         _responseText = 'Failed to pick or upload file.';
 //         _fileName = '';
+//         _selectedFile = null;
 //       });
 //     }
 //   }
@@ -61,61 +58,430 @@
 //       final responseData = jsonDecode(response.body);
 //       final List<dynamic>? alternatives =
 //       responseData['results']['channels'][0]['alternatives'];
-//       if (alternatives != null) {
-//         // Prepare the full response text for display
+//       if (alternatives != null && alternatives.isNotEmpty) {
 //         setState(() {
-//           _responseText = jsonEncode(responseData['results']['channels'][0]['alternatives'][0]['transcript']); // Displaying entire JSON response for simplicity
-//           _fileName = file.path.split('/').last;
+//           _responseText = alternatives[0]['transcript'];
 //         });
-//       }
-//       else {
+//         // Navigate to Emotion Detector Screen with transcription result and file path
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(
+//             builder: (context) => EmotionDetectorScreen(
+//               transcription: _responseText,
+//               filePath: _selectedFile?.path,
+//             ),
+//           ),
+//         );
+//       } else {
 //         setState(() {
 //           _responseText = 'No transcription alternatives found.';
-//           _fileName = '';
 //         });
 //       }
 //     } else {
 //       print('Error: ${response.reasonPhrase}');
 //       setState(() {
 //         _responseText = 'Failed to transcribe audio.';
-//         _fileName = '';
 //       });
+//     }
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
+//     return Scaffold(
+//       appBar: defaultAppBar(context, 'Speech Analysis'),
+//       body: Column(children: [
+//         Center(
+//           child: Image.asset(
+//             'assets/images/speech.png',
+//             width: size.width * 0.73,
+//             fit: BoxFit.cover,
+//           ),
+//         ),
+//         Padding(
+//           padding: const EdgeInsets.only(left: 40.0, top: 18, bottom: 18),
+//           child: Column(
+//             children: [
+//               Row(
+//                 children: [
+//                   Container(
+//                     width: 7,
+//                     height: 7,
+//                     decoration: BoxDecoration(
+//                         border: Border.all(color: const Color(0xff6D5DF3))),
+//                   ),
+//                   const Text(
+//                     ' Make sure you voice is clear.',
+//                     style: TextStyle(fontSize: 18, fontFamily: 'inter'),
+//                   ),
+//                 ],
+//               ),
+//               Row(
+//                 children: [
+//                   Container(
+//                     width: 7,
+//                     height: 7,
+//                     decoration: BoxDecoration(
+//                         border: Border.all(color: const Color(0xff6D5DF3))),
+//                   ),
+//                   const Text(
+//                     ' Upload voice from your device.',
+//                     style: TextStyle(fontSize: 18, fontFamily: 'inter'),
+//                   ),
+//                 ],
+//               ),
+//               Row(
+//                 children: [
+//                   Container(
+//                     width: 7,
+//                     height: 7,
+//                     decoration: BoxDecoration(
+//                         border: Border.all(color: const Color(0xff6D5DF3))),
+//                   ),
+//                   const Text(
+//                     ' Talk into microphone.',
+//                     style: TextStyle(fontSize: 18, fontFamily: 'inter'),
+//                   ),
+//                 ],
+//               ),
+//               Row(
+//                 children: [
+//                   Container(
+//                     width: 7,
+//                     height: 7,
+//                     decoration: BoxDecoration(
+//                         border: Border.all(color: const Color(0xff6D5DF3))),
+//                   ),
+//                   const Text(
+//                     ' Click Get result.',
+//                     style: TextStyle(fontSize: 18, fontFamily: 'inter'),
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//         GestureDetector(
+//           onTap: _pickAndUploadFile,
+//           child: Container(
+//               padding: const EdgeInsets.symmetric(horizontal: 20),
+//               height: size.height * 0.086,
+//               child: Card(
+//                 elevation: 8,
+//                 shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(16)),
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(10.0),
+//                   child: Row(
+//                     children: [
+//                       const Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           Text(
+//                             'Upload Voice File',
+//                             style: TextStyle(fontFamily: 'inter', fontSize: 18),
+//                           ),
+//                         ],
+//                       ),
+//                       Spacer(),
+//                       Image.asset('assets/images/upload.png'),
+//                     ],
+//                   ),
+//                 ),
+//               )),
+//         ),
+//         // const SizedBox(
+//         //   height: 8,
+//         // ),
+//         // GestureDetector(
+//         //   onTap: () {},
+//         //   child: Container(
+//         //       height: size.height * 0.09,
+//         //       width: size.width * 0.84,
+//         //       child: Card(
+//         //         elevation: 8,
+//         //         shape: RoundedRectangleBorder(
+//         //             borderRadius: BorderRadius.circular(16)),
+//         //         child: Padding(
+//         //           padding: const EdgeInsets.only(left: 10),
+//         //           child: Row(
+//         //             children: [
+//         //               const Column(
+//         //                 crossAxisAlignment: CrossAxisAlignment.start,
+//         //                 children: [
+//         //                   Padding(
+//         //                     padding: EdgeInsets.only(top: 20.0),
+//         //                     child: Text(
+//         //                       'Tap here to Talk   ',
+//         //                       style:
+//         //                           TextStyle(fontFamily: 'inter', fontSize: 18),
+//         //                     ),
+//         //                   ),
+//         //                 ],
+//         //               ),
+//         //               const SizedBox(
+//         //                 width: 70,
+//         //               ),
+//         //               Image.asset(
+//         //                 'assets/images/microphone.png',
+//         //                 width: 45,
+//         //               ),
+//         //             ],
+//         //           ),
+//         //         ),
+//         //       )),
+//         // ),
+//         SizedBox(
+//           height: size.height * 0.03,
+//         ),
+//         DefaultButton(
+//           size: size,
+//           txt: 'Get Result',
+//           function: (){},
+//         )
+//       ]),
+//     );
+//   }
+// }
+//
+// class EmotionService {
+//   final String apiUrl = 'https://api.edenai.run/v2/text/emotion_detection';
+//   final String apiKey =
+//       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZThkNWZlOTctZmQ2ZC00Y2FjLThmYmUtZWMwODE4Yjg1YjQ1IiwidHlwZSI6ImFwaV90b2tlbiJ9.slkRH3GEgJGK4BAwsASYsI5r_THbUKAIrbsNv0lYvJo';
+//
+//   Future<String> detectEmotion(String text) async {
+//     final response = await http.post(
+//       Uri.parse(apiUrl),
+//       headers: {
+//         'Authorization': apiKey,
+//         'Content-Type': 'application/json',
+//       },
+//       body: jsonEncode({
+//         "providers": ["nlpcloud"],
+//         "text": text,
+//         "settings": {},
+//         "response_as_dict": true,
+//         "attributes_as_list": false,
+//         "show_original_response": false,
+//       }),
+//     );
+//
+//     if (response.statusCode == 200) {
+//       Map<String, dynamic> responseBody = jsonDecode(response.body);
+//       if (responseBody.containsKey('nlpcloud') &&
+//           responseBody['nlpcloud'].containsKey('items') &&
+//           responseBody['nlpcloud']['items'] is List<dynamic> &&
+//           responseBody['nlpcloud']['items'].isNotEmpty) {
+//         Map<String, dynamic> firstItem = responseBody['nlpcloud']['items'][0];
+//         String emotion = firstItem['emotion'];
+//
+//         // Replace "joy" with "happy"
+//         if (emotion.toLowerCase() == "joy") {
+//           emotion = "happy";
+//         }
+//
+//         return emotion;
+//       } else {
+//         return 'No emotion detected';
+//       }
+//     } else {
+//       return 'Failed to detect emotion';
+//     }
+//   }
+// }
+//
+// class EmotionDetectorScreen extends StatefulWidget {
+//   final String transcription;
+//   final String? filePath;
+//
+//   const EmotionDetectorScreen({
+//     required this.transcription,
+//     this.filePath,
+//   });
+//
+//   @override
+//   _EmotionDetectorScreenState createState() => _EmotionDetectorScreenState();
+// }
+//
+// class _EmotionDetectorScreenState extends State<EmotionDetectorScreen> {
+//   final EmotionService _emotionService = EmotionService();
+//   final AudioPlayer _audioPlayer = AudioPlayer();
+//   bool _loading = false;
+//   String _emotionResult = '';
+//
+//   void _detectEmotion() async {
+//     String text = widget.transcription;
+//     if (text.isEmpty) {
+//       return;
+//     }
+//
+//     setState(() {
+//       _loading = true;
+//     });
+//
+//     try {
+//       String result = await _emotionService.detectEmotion(text);
+//
+//       setState(() {
+//         _loading = false;
+//         _emotionResult = result;
+//       });
+//
+//       _showBottomSheet();
+//     } catch (e) {
+//       setState(() {
+//         _loading = false;
+//       });
+//       _showBottomSheet('Error: $e');
+//     }
+//   }
+//
+//   void _playAudio() async {
+//     if (widget.filePath != null) {
+//       await _audioPlayer.play(DeviceFileSource(widget.filePath!));
 //     }
 //   }
 //
 //   @override
+//   void dispose() {
+//     _audioPlayer.dispose();
+//     super.dispose();
+//   }
+//
+//   void _showBottomSheet([String? result]) {
+//     showModalBottomSheet(
+//       context: context,
+//       isScrollControlled: true,
+//       shape: const RoundedRectangleBorder(
+//         borderRadius: BorderRadius.only(
+//           topLeft: Radius.circular(30),
+//           topRight: Radius.circular(30),
+//         ),
+//       ),
+//       builder: (BuildContext context) {
+//         return Padding(
+//           padding: const EdgeInsets.all(20),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               const Text(
+//                 'Analysis Result',
+//                 style: TextStyle(
+//                   fontSize: 25,
+//                   color: Colors.red,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               const SizedBox(height: 10),
+//               Text.rich(
+//                 TextSpan(
+//                   children: [
+//                     const TextSpan(
+//                       text: 'Your emotion is ',
+//                       style: TextStyle(
+//                         color: Color(0xFF100F11),
+//                         fontSize: 24,
+//                         fontWeight: FontWeight.w700,
+//                         letterSpacing: 0.24,
+//                       ),
+//                     ),
+//                     TextSpan(
+//                       text: _emotionResult,
+//                       style: const TextStyle(
+//                         color: Color(0xFF8B4CFC),
+//                         fontSize: 24,
+//                         fontWeight: FontWeight.w700,
+//                         letterSpacing: 0.24,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//               const SizedBox(height: 10),
+//               const Text(
+//                 'Keep tracking your mood to know how to improve your mental health.',
+//                 textAlign: TextAlign.center,
+//                 style: TextStyle(
+//                   color: Color(0xA5160B29),
+//                   fontSize: 16,
+//                   fontWeight: FontWeight.w400,
+//                 ),
+//               ),
+//               const SizedBox(height: 20),
+//               SizedBox(
+//                 width: double.infinity,
+//                 child: ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.pop(context);
+//                   },
+//                   child: const Text(
+//                     'Got it',
+//                     style: TextStyle(
+//                       fontSize: 18,
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//               const SizedBox(height: 10), // Add some space at the bottom
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+//
+//   @override
 //   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: Text('Upload Voice File'),
+//         title: Text('Emotion Detector'),
 //       ),
-//       body: Center(
+//       body: Padding(
+//         padding: const EdgeInsets.all(20),
 //         child: Column(
 //           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             ElevatedButton(
-//               onPressed: _pickAndUploadFile,
-//               child: Text('Pick and Upload Voice File'),
+//           children: [
+//             const Text(
+//               'Analyze Emotion',
+//               style: TextStyle(
+//                 fontSize: 24,
+//                 fontWeight: FontWeight.w700,
+//                 letterSpacing: 0.2,
+//                 color: Color(0xFF040506),
+//               ),
 //             ),
-//             SizedBox(height: 20),
-//             Text(
-//               'Selected file: $_fileName',
-//               style: TextStyle(fontSize: 16),
+//             const SizedBox(height: 20),
+//             const Text(
+//               'Analyzing your emotion from the transcription. Please wait...',
+//               textAlign: TextAlign.center,
+//               style: TextStyle(
+//                 color: Color(0xFFA81010),
+//                 fontSize: 16,
+//                 fontWeight: FontWeight.w400,
+//               ),
 //             ),
-//             SizedBox(height: 20),
-//             Text(
-//               'API Response:',
-//               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//             ),
-//             SizedBox(height: 10),
-//             Expanded(
-//               child: SingleChildScrollView(
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(16.0),
-//                   child: Text(
-//                     _responseText,
-//                     style: TextStyle(fontSize: 14),
+//             const SizedBox(height: 20),
+//             if (widget.filePath != null) ...[
+//               ElevatedButton(
+//                 onPressed: _playAudio,
+//                 child: const Text(
+//                   'Play Audio',
+//                   style: TextStyle(
+//                     fontSize: 18,
 //                   ),
+//                 ),
+//               ),
+//               const SizedBox(height: 20),
+//             ],
+//             ElevatedButton(
+//               onPressed: _detectEmotion,
+//               child: const Text(
+//                 'Detect Emotion',
+//                 style: TextStyle(
+//                   fontSize: 18,
 //                 ),
 //               ),
 //             ),
@@ -125,5 +491,3 @@
 //     );
 //   }
 // }
-//
-//
