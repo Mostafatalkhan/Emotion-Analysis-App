@@ -143,7 +143,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 class EmotionService {
   final String apiUrl = 'https://api.edenai.run/v2/text/emotion_detection';
   final String apiKey =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjA0NDg1ZWQtZjc3Mi00ZDJjLTg2YjAtNzEwNTY2NWVlYzM3IiwidHlwZSI6ImFwaV90b2tlbiJ9.56hgd4ClsWxhcCXcz8IMmtN5PzPonvHl3pKay5mluqg';
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmRkNDZlNDctNjZhNy00MWIwLTlmOWEtODlmOGFkYjE2MzQ2IiwidHlwZSI6ImFwaV90b2tlbiJ9.h40ZPj6DaqNg0vu1MIOE0HVOcVcr-sMIQiS_0A4Xm1M';
 
   Future<String> detectEmotion(String text) async {
     final response = await http.post(

@@ -22,7 +22,7 @@ class _FaceViewState extends State<FaceView> {
   final ImagePicker _picker = ImagePicker();
 
   final String rapidApiKey =
-      '4e9b63802bmshfad12248c0df9cbp15d021jsn06eed1a203d3'; // Replace with your RapidAPI key
+      '67a966d393mshc54dcccf3a72a54p1e5c66jsna701f158d996'; // Replace with your RapidAPI key
   final String rapidApiHost = 'faceanalyzer-ai.p.rapidapi.com';
   final String endpoint = 'https://faceanalyzer-ai.p.rapidapi.com/faceanalysis';
 

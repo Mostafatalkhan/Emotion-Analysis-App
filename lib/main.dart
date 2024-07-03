@@ -6,6 +6,7 @@ import 'package:graduationproject/feature/setting/presentation/manage/Complaints
 import 'package:graduationproject/feature/setting/presentation/manage/cubit/setting_cubit.dart';
 import 'package:graduationproject/feature/setting/presentation/view/setting_view.dart';
 import 'package:graduationproject/feature/splash/ui/custom_splash_screen.dart';
+import 'package:graduationproject/views/face_view.dart';
 import 'package:graduationproject/views/home_view.dart';
 import 'package:graduationproject/views/speech_view.dart';
 import 'core/utils/api_service.dart';
